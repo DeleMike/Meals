@@ -76,7 +76,7 @@ flutter:
           weight: 700
         - asset: assets/fonts/RobotoCondensed-Light.ttf
           weight: 300
-        - asset: assets/fonts/RobotoCondensed-Italic.ttf
+        - asset: assets/fonts/RobotoCondensed-Italic.tt
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
