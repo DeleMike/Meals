@@ -425,7 +425,7 @@ const DUMMY_MEALS = const [
       'c2',
     ],
     title: 'Pounded Yam',
-    affordability: Affordability.Affordable,
+    affordability: Affordability.Pricey,
     complexity: Complexity.Simple,
     imageUrl:
     'https://www.deesmealz.com/wp-content/uploads/2020/01/Served-Pounded-Yam-1536x1023.jpg',
