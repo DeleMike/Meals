@@ -4,6 +4,10 @@ import '../dummy_data.dart';
 
 class MealDetail extends StatelessWidget {
   static const routeName = '/meal-detail';
+  final Function toggleFavorites;
+  final Function isFavorite;
+
+  MealDetail(this.toggleFavorites, this.isFavorite);
 
   Widget buildSectionTitle(String text, BuildContext context) {
     return Container(
@@ -53,18 +57,18 @@ class MealDetail extends StatelessWidget {
                 title: Container(
                   margin: const EdgeInsets.only(left: 16),
                   child: Text(
-                      selectedMeal.title,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16.0,
-                      ),
+                    selectedMeal.title,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16.0,
                     ),
+                  ),
                 ),
                 background: Container(
                   height: mediaQuery.size.height * 0.3,
                   width: double.infinity,
-                  child: Image.network(selectedMeal.imageUrl,
-                      fit: BoxFit.cover),
+                  child:
+                      Image.network(selectedMeal.imageUrl, fit: BoxFit.cover),
                 ),
               ),
             )
@@ -113,6 +117,15 @@ class MealDetail extends StatelessWidget {
             ],
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(
+          isFavorite(mealId) ? Icons.star : Icons.star_border,
+        ),
+        onPressed: () {
+          toggleFavorites(mealId);
+        }
+            
       ),
     );
   }

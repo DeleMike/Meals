@@ -11,16 +11,26 @@ class MealItem extends StatelessWidget {
   final Complexity complexity;
   final Affordability affordability;
 
-  MealItem(
-      {@required this.id,
-        @required this.title,
-      @required this.imageUrl,
-      @required this.duration,
-      @required this.complexity,
-      @required this.affordability});
+  MealItem({
+    @required this.id,
+    @required this.title,
+    @required this.imageUrl,
+    @required this.duration,
+    @required this.complexity,
+    @required this.affordability,});
 
   void selectMeal(BuildContext context) {
-    Navigator.of(context).pushNamed(MealDetail.routeName, arguments: id);
+    Navigator.of(context)
+        .pushNamed(
+      MealDetail.routeName,
+      arguments: id,
+    )
+        .then((result) {
+      //get the meal_id from meal details page
+      if (result != null) {
+        //removeItem(result);
+      }
+    });
   }
 
   String get complexityText {
@@ -32,7 +42,7 @@ class MealItem extends StatelessWidget {
       case Complexity.Challenging:
         return 'Challenging';
       default:
-        return 'Unknown';  
+        return 'Unknown';
     }
   }
 
@@ -45,7 +55,7 @@ class MealItem extends StatelessWidget {
       case Affordability.Luxurious:
         return 'Expensive';
       default:
-        return 'Unknown';  
+        return 'Unknown';
     }
   }
 
