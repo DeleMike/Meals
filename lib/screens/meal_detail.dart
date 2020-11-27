@@ -41,54 +41,77 @@ class MealDetail extends StatelessWidget {
     final selectedMeal = DUMMY_MEALS.firstWhere(
         (meal) => meal.id == mealId); //get selected meal based on ID
     return Scaffold(
-      appBar: AppBar(
-        title: Text('${selectedMeal.title}'),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              height: 300,
-              width: double.infinity,
-              child: Image.network(
-                selectedMeal.imageUrl,
-                fit: BoxFit.cover,
-              ),
-            ),
-            buildSectionTitle('Ingredients', context),
-            buildContainer(
-                ListView.builder(
-                  itemBuilder: (ctx, index) {
-                    return Card(
-                      color: Theme.of(context).accentColor.withOpacity(0.7),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 5,
-                          horizontal: 10,
-                        ),
-                        child: Text(
-                          selectedMeal.ingredients[index],
-                        ),
+      body: NestedScrollView(
+        headerSliverBuilder: (BuildContext ctx, bool innerBoxIsScrolled) {
+          return [
+            SliverAppBar(
+              expandedHeight: 250,
+              floating: false,
+              pinned: true,
+              flexibleSpace: FlexibleSpaceBar(
+                centerTitle: true,
+                title: Container(
+                  margin: const EdgeInsets.only(left: 16),
+                  child: Text(
+                      selectedMeal.title,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16.0,
                       ),
-                    );
-                  },
-                  itemCount: selectedMeal.ingredients.length,
+                    ),
                 ),
-                mediaQuery),
-            buildSectionTitle('Steps', context),
-            buildContainer(ListView.builder(
-              itemBuilder: (ctx, index) => Column(
-                children: [
-                  ListTile(
-                    leading: CircleAvatar(child: Text('# ${index + 1}'),),
-                    title: Text(selectedMeal.steps[index]),
-                  ),
-                  Divider(),
-                ],
+                background: Container(
+                  height: mediaQuery.size.height * 0.3,
+                  width: double.infinity,
+                  child: Image.network(selectedMeal.imageUrl,
+                      fit: BoxFit.cover),
+                ),
               ),
-              itemCount: selectedMeal.steps.length,
-            ),mediaQuery),
-          ],
+            )
+          ];
+        },
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              buildSectionTitle('Ingredients', context),
+              buildContainer(
+                  ListView.builder(
+                    itemBuilder: (ctx, index) {
+                      return Card(
+                        color: Theme.of(context).accentColor.withOpacity(0.7),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 5,
+                            horizontal: 10,
+                          ),
+                          child: Text(
+                            selectedMeal.ingredients[index],
+                          ),
+                        ),
+                      );
+                    },
+                    itemCount: selectedMeal.ingredients.length,
+                  ),
+                  mediaQuery),
+              buildSectionTitle('Steps', context),
+              buildContainer(
+                  ListView.builder(
+                    itemBuilder: (ctx, index) => Column(
+                      children: [
+                        ListTile(
+                          leading: CircleAvatar(
+                            child: Text('# ${index + 1}'),
+                          ),
+                          title: Text(selectedMeal.steps[index]),
+                        ),
+                        Divider(),
+                      ],
+                    ),
+                    itemCount: selectedMeal.steps.length,
+                  ),
+                  mediaQuery),
+            ],
+          ),
         ),
       ),
     );
