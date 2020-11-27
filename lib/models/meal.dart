@@ -6,7 +6,7 @@ enum Complexity {
   Hard,
 }
 
-enum Affordability { Affordable, Pricey, Luxuurious }
+enum Affordability { Affordable, Pricey, Luxurious }
 
 class Meal {
   final String id;
@@ -21,7 +21,7 @@ class Meal {
   final bool isGlutenFree;
   final bool isLactoseFree;
   final bool isVegan;
-  final bool isVegeterian;
+  final bool isVegetarian;
 
   const Meal(
       {@required this.id,
@@ -36,5 +36,5 @@ class Meal {
       @required this.isGlutenFree,
       @required this.isLactoseFree,
       @required this.isVegan,
-      @required this.isVegeterian});
+      @required this.isVegetarian});
 }
